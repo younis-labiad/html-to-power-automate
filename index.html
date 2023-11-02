@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+   <title>Document</title>
+   <script>
+    $(function () {
+      $("#btn_submit").click(function () {
+        var formData = {
+          Title: $("#Title").val(),
+          FirstName: $("#FirstName").val(),
+          LastName: $("#LastName").val(),
+        };
+        $.ajax({
+          contentType: "application/json",
+          type: "POST",
+          url: "https://prod-13.westeurope.logic.azure.com:443/workflows/ce88549465e7421a8fe5d387d17a1bee/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Egr-NKbko4p7rvs7CP5ZRcH796j9O4vchV8h1H7d_S8",
+          data: JSON.stringify(formData),
+          success: function () {
+            $("#postResult").val("Success");
+          },
+  
+          error: function () {
+            $("#postResult").val("Failed");
+          },
+        });
+      });
+    });
+  </script>
+
+</head>
+<body>
+    <body>
+  <input type="text" id="Title" placeholder="Title" />
+  <input type="text" id="FirstName" placeholder="First name" />
+  <input type="text" id="LastName" placeholder="Last name" />
+  <button id="btn_submit">Submit</button>
+  <input id="postResult" type="text" value="Empty" /><br />
+</body>
+</body>
+</html>
